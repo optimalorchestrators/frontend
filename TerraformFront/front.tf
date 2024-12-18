@@ -18,7 +18,7 @@ resource "aws_amplify_app" "morningnewstestfront" {
   repository   = var.repository
   access_token = var.amplify_github_token
   platform     = var.platform
-  #iam_service_role_arn = aws_iam_role.amplify_role.arn
+  # iam_service_role_arn = aws_iam_role.amplify_role.arn
 
   # The default build_spec added by the Amplify Console for React. 
   build_spec = <<-EOT

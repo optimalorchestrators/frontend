@@ -1,8 +1,7 @@
 variable "amplify_github_token" {
   type        = string
   description = "token to connect github repo"
-  default = ""
-  sensitive = true
+  sensitive   = true
 }
 
 variable "platform" {
@@ -10,7 +9,7 @@ variable "platform" {
   description = "platform type"
   default     = "WEB_COMPUTE"
 }
-  
+
 
 variable "repository" {
   type        = string
@@ -18,11 +17,11 @@ variable "repository" {
   default     = "https://github.com/optimalorchestrators/frontend.git"
 }
 
-variable "iam_service_role_arn" {
-  type        = string
-  description = "role IAM"
-  default     = ""
-}
+# variable "iam_service_role_arn" {
+#   type        = string
+#   description = "role IAM"
+#   default     = ""
+# }
 
 variable "app_name" {
   type        = string

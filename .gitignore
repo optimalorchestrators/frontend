@@ -36,8 +36,4 @@ yarn-error.log*
 .terraform.lock.hcl
 **/terraform.tfstate
 **/terraform.tfstate.backup
-**/iam_policy_attachment.tfare
-**/iam_policy_attachment.tf
-**/iam_role.tfare
-**/iam_role.tf
 xxx.pdf
