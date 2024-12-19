@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "aws" {
-  access_key = var.aws_access_key_id
-  secret_key = var.aws_secret_access_key
+  # access_key = var.aws_access_key_id
+  # secret_key = var.aws_secret_access_key
   region = "eu-west-3"
 }
 
@@ -22,7 +22,7 @@ resource "aws_amplify_app" "morningnewstestfront" {
   platform     = var.platform
   # iam_service_role_arn = aws_iam_role.amplify_role.arn
 
-  # The default build_spec added by the Amplify Console for React. 
+  # The default build_spec added by the Amplify Console for React.
   build_spec = <<-EOT
   version: 0.1
   frontend:
