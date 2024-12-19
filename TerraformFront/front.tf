@@ -73,7 +73,7 @@ resource "aws_amplify_domain_association" "domain_association" {
 resource "null_resource" "amplify_deployment" {
   depends_on = [var.branch_name]
   provisioner "local-exec" {
-    command = "aws amplify start-job --app-id ${aws_amplify_app.morningnewstestfront.id} --branch-name main --job-type RELEASE"
+    command = "aws amplify start-job --app-id ${aws_amplify_app.morningnewstestfront.id} --branch-name dev --job-type RELEASE"
   }
 }
 
