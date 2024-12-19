@@ -31,9 +31,9 @@ jobs:
         working-directory: ./TerraformFront
         run: terraform init
 
-      - name: Terraform Plan
-        working-directory: ./TerraformFront
-        run: terraform plan
+      # - name: Terraform Plan
+      #   working-directory: ./TerraformFront
+      #   run: terraform plan
 
       - name: Terraform Apply
         working-directory: ./TerraformFront
