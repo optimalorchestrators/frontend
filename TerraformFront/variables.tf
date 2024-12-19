@@ -26,15 +26,15 @@ variable "amplify_github_token" {
 
 variable "platform" {
   type        = string
-  description = "platform type"
+  # description = "platform type"
   default     = "WEB_COMPUTE"
 }
 
 
 variable "repository" {
   type        = string
-  description = "github repo url"
-  default     = "https://github.com/optimalorchestrators/frontend.git"
+  # description = "github repo url"
+  # default     = "https://github.com/optimalorchestrators/frontend.git"
 }
 
 # variable "iam_service_role_arn" {
@@ -45,8 +45,8 @@ variable "repository" {
 
 variable "app_name" {
   type        = string
-  description = "Morning News Test Front"
-  default     = "morningnewstestfront"
+  # description = "Morning News Test Front"
+  # default     = "morningnewstestfront"
 }
 
 variable "branch_name" {
