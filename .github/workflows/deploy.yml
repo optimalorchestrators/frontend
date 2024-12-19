@@ -22,7 +22,10 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.10.2
-        
+          
+      - name: Install dependencies
+        run: npm install
+
       - name: Terraform Init
         working-directory: ./TerraformFront
         run: terraform init
@@ -34,4 +37,3 @@ jobs:
       - name: Terraform Apply
         working-directory: ./TerraformFront
         run: terraform apply -auto-approve -input=false
-        
