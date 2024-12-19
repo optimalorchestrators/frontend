@@ -34,7 +34,7 @@ variable "platform" {
 variable "repository" {
   type        = string
   # description = "github repo url"
-  # default     = "https://github.com/optimalorchestrators/frontend.git"
+  default     = "https://github.com/optimalorchestrators/frontend.git"
 }
 
 # variable "iam_service_role_arn" {
@@ -46,7 +46,7 @@ variable "repository" {
 variable "app_name" {
   type        = string
   # description = "Morning News Test Front"
-  # default     = "morningnewstestfront"
+  default     = "morningnewstestfront"
 }
 
 variable "branch_name" {
