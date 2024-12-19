@@ -52,7 +52,7 @@ variable "app_name" {
 variable "branch_name" {
   type        = string
   description = "Morning News Repo Branch Name"
-  default     = "main"
+  default     = "dev"
 }
 
 
