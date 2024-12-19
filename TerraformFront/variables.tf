@@ -19,7 +19,7 @@ variable "aws_region" {
 }
 variable "amplify_github_token" {
   type        = string
-  description = "token to connect github repo"
+  # description = "token to connect github repo"
   # default = "AMPLIFY_GITHUB_TOKEN"
   sensitive   = true
 }
