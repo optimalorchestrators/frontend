@@ -1,12 +1,12 @@
 variable "aws_access_key_id" {
-  type = string
+  type        = string
   description = "access key of AWS"
   # default = "AWS_ACCESS_KEY_ID"
   sensitive = true
 }
 
 variable "aws_secret_access_key" {
-  type = string
+  type        = string
   description = "secret key of AWS"
   # default = "AWS_SECRET_ACCESS_KEY"
   sensitive = true
@@ -17,24 +17,24 @@ variable "aws_region" {
   type    = string
   default = "eu-west-3"
 }
-variable "amplify_github_token" {
-  type        = string
+variable "PATTI_GITHUB_TOKEN" {
+  type = string
   # description = "token to connect github repo"
-  # default = "AMPLIFY_GITHUB_TOKEN"
+  # default = "PATTI_GITHUB_TOKEN"
   # sensitive   = true
 }
 
 variable "platform" {
-  type        = string
+  type = string
   # description = "platform type"
-  default     = "WEB_COMPUTE"
+  default = "WEB_COMPUTE"
 }
 
 
 variable "repository" {
-  type        = string
+  type = string
   # description = "github repo url"
-  default     = "https://github.com/optimalorchestrators/frontend.git"
+  default = "https://github.com/optimalorchestrators/frontend.git"
 }
 
 # variable "iam_service_role_arn" {
@@ -44,9 +44,9 @@ variable "repository" {
 # }
 
 variable "app_name" {
-  type        = string
+  type = string
   # description = "Morning News Test Front"
-  default     = "morningnewstestfront"
+  default = "morningnewstestfront"
 }
 
 variable "branch_name" {

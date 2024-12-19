@@ -11,14 +11,14 @@ terraform {
 provider "aws" {
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
-  region = "eu-west-3"
+  region     = "eu-west-3"
 }
 
 # Création de l'application
 resource "aws_amplify_app" "morningnewstestfront" {
   name         = var.app_name
   repository   = var.repository
-  access_token = var.amplify_github_token
+  access_token = var.PATTI_GITHUB_TOKEN
   platform     = var.platform
   # iam_service_role_arn = aws_iam_role.amplify_role.arn
 
