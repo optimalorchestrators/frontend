@@ -1,14 +1,14 @@
 variable "aws_access_key_id" {
   type = string
   description = "access key of AWS"
-  default = "AWS_ACCESS_KEY_ID"
+  # default = "AWS_ACCESS_KEY_ID"
   sensitive = true
 }
 
 variable "aws_secret_access_key" {
   type = string
   description = "secret key of AWS"
-  default = "AWS_SECRET_ACCESS_KEY"
+  # default = "AWS_SECRET_ACCESS_KEY"
   sensitive = true
 }
 
@@ -20,7 +20,7 @@ variable "aws_region" {
 variable "amplify_github_token" {
   type        = string
   description = "token to connect github repo"
-  default = "AMPLIFY_GITHUB_TOKEN"
+  # default = "AMPLIFY_GITHUB_TOKEN"
   sensitive   = true
 }
 
