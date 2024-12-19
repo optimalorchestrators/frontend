@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "aws" {
-  access_key = TF_VAR_aws_access_key_id
-  secret_key = TF_VAR_aws_secret_access_key
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
   region = "eu-west-3"
 }
 
@@ -18,7 +18,7 @@ provider "aws" {
 resource "aws_amplify_app" "morningnewstestfront" {
   name         = var.app_name
   repository   = var.repository
-  access_token = TF_VAR_amplify_github_token
+  access_token = var.amplify_github_token
   platform     = var.platform
   # iam_service_role_arn = aws_iam_role.amplify_role.arn
 

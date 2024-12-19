@@ -47,4 +47,4 @@ jobs:
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
           TF_VAR_amplify_github_token: ${{ secrets.AMPLIFY_GITHUB_TOKEN }}
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -var="github_token=${{ secrets.AMPLIFY_GITHUB_TOKEN }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}"
