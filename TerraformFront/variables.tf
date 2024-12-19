@@ -17,12 +17,12 @@ variable "aws_region" {
   type    = string
   default = "eu-west-3"
 }
-# variable "amplify_github_token" {
-#   type        = string
-#   # description = "token to connect github repo"
-#   # default = "AMPLIFY_GITHUB_TOKEN"
-#   # sensitive   = true
-# }
+variable "amplify_github_token" {
+  type        = string
+  description = "token to connect github repo"
+  default = "AMPLIFY_GITHUB_TOKEN"
+  sensitive   = true
+}
 
 variable "platform" {
   type        = string
