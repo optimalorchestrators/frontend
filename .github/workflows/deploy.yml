@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: terraform format
+        run: terraform fmt -check
+
       - name: Terraform Init
         working-directory: ./TerraformFront
         run: terraform init
