@@ -33,8 +33,8 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./TerraformFront
-        run: terraform plan -chdir=./TerraformFront
+        run: terraform plan
 
       - name: Terraform Apply
         working-directory: ./TerraformFront
-        run: terraform apply -auto-approve -chdir=./TerraformFront
+        run: terraform apply -auto-approve
