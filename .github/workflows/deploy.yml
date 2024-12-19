@@ -37,4 +37,6 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./TerraformFront
+        env:
+          TF_VAR_amplify_github_token: ${{ secrets.AMPLIFY_GITHUB_TOKEN }}
         run: terraform apply -auto-approve
