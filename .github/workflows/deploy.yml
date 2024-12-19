@@ -29,12 +29,12 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./TerraformFront
-        run: terraform init
+        run: terraform init -chdir=./TerraformFront
 
       - name: Terraform Plan
         working-directory: ./TerraformFront
-        run: terraform plan -auto-approve -input=false
+        run: terraform plan -chdir=./TerraformFront
 
       - name: Terraform Apply
         working-directory: ./TerraformFront
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -chdir=./TerraformFront
