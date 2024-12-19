@@ -13,6 +13,11 @@ provider "aws" {
   secret_key = var.aws_secret_access_key
   region     = "eu-west-3"
 }
+variable "aws_session_token" {
+  description = "AWS session token"
+  type        = string
+  sensitive   = true
+}
 
 # Création de l'application
 resource "aws_amplify_app" "morningnewstestfront" {
