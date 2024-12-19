@@ -18,7 +18,7 @@ provider "aws" {
 resource "aws_amplify_app" "morningnewstestfront" {
   name         = var.app_name
   repository   = var.repository
-  access_token = var.amplify_github_token
+  access_token = amplify_github_token
   platform     = var.platform
   # iam_service_role_arn = aws_iam_role.amplify_role.arn
 

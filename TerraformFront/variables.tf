@@ -21,7 +21,7 @@ variable "amplify_github_token" {
   type        = string
   # description = "token to connect github repo"
   # default = "AMPLIFY_GITHUB_TOKEN"
-  sensitive   = true
+  # sensitive   = true
 }
 
 variable "platform" {
