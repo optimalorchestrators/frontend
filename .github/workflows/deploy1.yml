@@ -1,53 +1,75 @@
-name: CI pipeline
+name: CI Pipeline
 
-stages:
-  - cypress
-  - jest
-  - eslint
-  - sonarcloud
-  
 on:
   push:
     branches:
+      - main
       - dev
   pull_request:
     branches:
-     - dev
-  
+      - main
+      - dev
+
 jobs:
   cypress:
-    image: cypress/browsers:22.12.0
-    stage: test
-    script:
-      - npm install
-      - npx install cypress &
-      - yarn run cypress open
-    only: dev
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:22.12.0
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests
+        run: npx cypress run
 
   jest:
-    image: node:18-alpine
-    stage: jest
-    script:
-      - npm install
-      - npm test
+    name: Run Jest Tests
+    runs-on: ubuntu-latest
+    container:
+      image: node:18-alpine
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Jest Tests
+        run: npm test
 
   eslint:
-    image: node:18-alpine
-    stage: lint
-    script:
-     - npm install
-     - npm run lint
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    container:
+      image: node:18-alpine
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
 
   sonarcloud:
-    image: sonarsource/sonarcloud-scan:3.1.0
-    stage: sonarcloud
-    script: 
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+    container:
+      image: sonarsource/sonarcloud-scan:3.1.0
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    with:
-      args: >
-        -Dsonar.organization=optimalorchestrators_frontend
-        -Dsonar.projectKey=optimalorchestrators
-        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run SonarCloud Analysis
+        run: |
+          sonar-scanner \
+            -Dsonar.organization=optimalorchestrators_frontend \
+            -Dsonar.projectKey=optimalorchestrators \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

@@ -9,15 +9,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      TF_VAR_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    env: # ce bloc contient les varibales d'environnement qui sont enregitrées dans le projet 
+      TF_VAR_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
       TF_VAR_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       TF_VAR_AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       TF_VAR_PATTI_GITHUB_TOKEN: ${{ secrets.PATTI_GITHUB_TOKEN }}
       AWS_DEFAULT_REGION: "eu-west-3"
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout code # cette ligne permet de récupérer le code du repo avec actions/checkout@v2
+        uses: actions/checkout@v2 
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
@@ -31,13 +31,15 @@ jobs:
         run: terraform fmt -check
 
       - name: Terraform Init
-        working-directory: ./TerraformFront
+        working-directory: ./TerraformFront # nous travaillons dans le dossier TerraformFront car les fichiers .tf s'y trouvent
         run: terraform init
 
-      - name: Terraform Plan
+      - name: Terraform Plan 
         working-directory: ./TerraformFront
         run: terraform plan -input=false -var="PATTI_GITHUB_TOKEN=${{ secrets.PATTI_GITHUB_TOKEN }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}"
 
       - name: Terraform Apply
         working-directory: ./TerraformFront
         run: terraform apply -auto-approve -input=false -var="PATTI_GITHUB_TOKEN=${{ secrets.PATTI_GITHUB_TOKEN }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}"
+
+        # pour les étapes Plan et Apply, on rappelle les variables d'environnement pour s'assurer qu'elles soient bien prises en compte
