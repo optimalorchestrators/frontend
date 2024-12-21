@@ -4,14 +4,15 @@ on:
   push:
     branches:
       - main
-      - dev
+      - devGT
+      - devpa
 
 jobs:
   cypress:
     name: Run Cypress Tests
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers:22.12.0
+      image: cypress/base:10
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -30,6 +31,14 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Dependencies
         run: npm install
@@ -66,6 +75,6 @@ jobs:
       - name: Run SonarCloud Analysis
         run: |
           sonar-scanner \
-            -DSonar.organization=optimalorchestrators_frontend \
+            -Dsonar.organization=optimalorchestrators_frontend \
             -Dsonar.projectKey=optimalorchestrators \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
