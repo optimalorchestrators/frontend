@@ -60,7 +60,7 @@ jobs:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
     container:
-      image: sonarsource/sonarcloud-scan:3.1.0
+      image: sonar-source/sonarcloud-scan:3.1.0
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
@@ -70,6 +70,6 @@ jobs:
       - name: Run SonarCloud Analysis
         run: |
           sonar-scanner \
-            -Dsonar.organization=optimalorchestrators_frontend \
+            -DSonar.organization=optimalorchestrators_frontend \
             -Dsonar.projectKey=optimalorchestrators \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
