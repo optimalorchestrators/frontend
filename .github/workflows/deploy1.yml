@@ -32,6 +32,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: install transform-css
+        run: npm install --save-dev jest-transform-css
+
+
       - name: Cache Node Modules
         uses: actions/cache@v3
         with:
@@ -78,3 +82,4 @@ jobs:
             -Dsonar.organization=optimalorchestrators_frontend \
             -Dsonar.projectKey=optimalorchestrators \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.host.url=https://sonarcloud.io
