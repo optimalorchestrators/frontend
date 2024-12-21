@@ -78,7 +78,7 @@ resource "aws_amplify_domain_association" "domain_association" {
 resource "null_resource" "amplify_deployment" {
   depends_on = [aws_amplify_app.morningnewstestfront]
   provisioner "local-exec" {
-    command = "AWS_ACCESS_KEY_ID=${var.aws_access_key} AWS_SECRET_ACCESS_KEY=${var.aws_secret_key} aws amplify start-job --app-id ${aws_amplify_app.morningnewstestfront.id} --branch-name dev --job-type RELEASE"
+    command = "AWS_ACCESS_KEY_ID=${var.aws_access_key_id} AWS_SECRET_ACCESS_KEY=${var.aws_secret_access_key} aws amplify start-job --app-id ${aws_amplify_app.morningnewstestfront.id} --branch-name dev --job-type RELEASE"
   }
 }
 
