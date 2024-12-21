@@ -1,0 +1,16 @@
+ {
+ "name": "cypress",
+  "version": "1.0.0",
+  "main": "morningnews.cy.js",
+  "scripts": {
+    "test": "npx cypress run --config video=false",
+    "cypress:open": "npx cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^13.16.1"
+  }
+}

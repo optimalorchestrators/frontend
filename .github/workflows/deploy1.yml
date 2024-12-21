@@ -34,6 +34,9 @@ jobs:
 
       - name: install transform-css
         run: npm install --save-dev jest-transform-css
+        
+      - name: install transform-file
+        run: npm install --save-dev jest-transform-file
 
 
       - name: Cache Node Modules
