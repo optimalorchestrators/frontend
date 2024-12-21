@@ -42,7 +42,7 @@ function Header() {
   };
 
   const handleConnection = () => {
-    fetch('https://backend.devopslab.cloud//users/signin', {
+    fetch('https://backend.devopslab.cloud/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: signInUsername, password: signInPassword }),
