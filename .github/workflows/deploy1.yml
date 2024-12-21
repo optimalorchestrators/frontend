@@ -65,7 +65,7 @@ jobs:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
     container:
-      image: sonar-source/sonarcloud-scan:3.1.0
+      image: sonarsource/sonar-scanner-cli:4.6
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
