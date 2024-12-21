@@ -13,7 +13,7 @@ function Home() {
   const [topArticle, setTopArticle] = useState({});
 
   useEffect(() => {
-    fetch('http://www.devopslab.com/articles')
+    fetch('https://backend.devopslab.cloud/articles')
       .then(response => response.json())
       .then(data => {
         setTopArticle(data.articles[0]);
