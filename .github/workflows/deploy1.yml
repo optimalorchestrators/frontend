@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress Tests
-        run: npx cypress run
+        run: npx cypress open
 
   jest:
     name: Run Jest Tests
@@ -60,6 +60,7 @@ jobs:
       image: sonar-source/sonarcloud-scan:3.1.0
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
