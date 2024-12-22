@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress Tests
-        run: npx cypress open
+        run: npm run cypress open
 
   jest:
     name: Run Jest Tests
@@ -60,14 +60,16 @@ jobs:
       image: sonar-source/sonarcloud-scan:3.1.0
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+              fetch-depth: 0
 
       - name: Run SonarCloud Analysis
         run: |
           sonar-scanner \
-            -DSonar.organization=optimalorchestrators_frontend \
+            -Dsonar.organization=optimalorchestrators_frontend \
             -Dsonar.projectKey=optimalorchestrators \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.host.url=https://sonarcloud.io
