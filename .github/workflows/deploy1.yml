@@ -56,20 +56,17 @@ jobs:
   sonarcloud:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
+    container:
+      image: sonar-source/sonarcloud-scan:3.1.0
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-         GITHUB_TOKEN: ${{ secrets.PATTI_GITHUB_TOKEN }}
-         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=optimalorchestrators_frontend
-            -Dsonar.projectKey=optimalorchestrators
+      
+      - name: Run SonarCloud Analysis
+        run: |
+          sonar-scanner \
+            -DSonar.organization=optimalorchestrators_frontend \
+            -Dsonar.projectKey=optimalorchestrators \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-
