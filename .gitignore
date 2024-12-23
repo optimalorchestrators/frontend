@@ -37,3 +37,6 @@ yarn-error.log*
 **/terraform.tfstate
 **/terraform.tfstate.backup
 xxx.pdf
+
+# images
+*.png

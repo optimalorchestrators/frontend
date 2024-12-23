@@ -45,5 +45,17 @@ La première étape de chaque job est de récupérer le code du repo avec action
 * Mettre à jour la partie scripts du fichier package.json avec : "lint": "next lint"
 
 ### Tests SonarCloud
-* Créer une organisation et un projet dans l'interface SonarCloud
-* 
+* Créer une organisation et un projet dans l'interface SonarCloud. 
+* Les deux premièress lignes se trouvent dans SonarCloud : organization et projectkey
+* La troisième ligne indique à SonarCloud où trouver le rapport de couverture de code au format LCOV.
+
+# Le choix d'AWS Amplify
+
+AWS Amplify permet de déployer des applications ayant des front-end statiques pour lesquelles il est :
+- facile de se connecter à une source de données (ici, le backend qui est lui-même connecté à la base de données)
+- simple de de gérer l'authentification des utilisateurs
+Le déploiement d'un frontend via AWS Amplify se base sur un dépôt Git et bénificie du réseau de diffusion de contenu (CDN) de AWS disponible dans le monde entier, donc au plus proches des utilisateurs.
+Le nom de domaine de l'application peut-être configuré et sécurisé via l'outil AWS Route 53. Ainsi le monitoring de l'application AWS Amplify se fera via AWS CloudWatch.
+De plus, Amplify est une solution PaaS. Dans le cadre de la gratuité, cette solution est gratuite pendant 12 mois puis la facturation se fera en fonction de son utilisation.
+
+![image](/Fonctionnement_AWS_Amplify.png "Fonctionnement AWS Amplify")
