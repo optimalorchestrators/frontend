@@ -25,9 +25,8 @@ resource "aws_amplify_app" "morningnewstestfront" {
   repository   = var.repository
   access_token = var.PATTI_GITHUB_TOKEN
   platform     = var.platform
-  # iam_service_role_arn = aws_iam_role.amplify_role.arn
 
-  # The default build_spec added by the Amplify Console for React.
+  # Build_spec est le job qui doit être lancé suite à la création de l'application amplify
   build_spec = <<-EOT
   version: 0.1
   frontend:
@@ -48,26 +47,26 @@ resource "aws_amplify_app" "morningnewstestfront" {
           - .npm/**/*
   EOT
 
-  # The default rewrites and redirects added by the Amplify Console.
+  # Ajout d'une règle personnalisée pour gérer des erreurs 404 pour l'application. Cette règle est applicable car le site est statique et comporte une seule page
   custom_rule {
-    source = "/<*>"
-    status = "404"
-    target = "/index.html"
+    source = "/<*>" # cette règle s'applique à toutes les urls du site, quelque soit le chemin
+    status = "404" # cette règle s'applique aux requêtes dont le retour est 404 Page non trouvée
+    target = "/index.html" # Lorsqu'une erreur 404 est rencontrée, la requête sera redirigée vers le fichier index.html
   }
 }
 
-# Création d'une branche
+# Ressource qui permet de créer et de gérer une branche spécifique dans l'application AWS Amplify. Cela permet d'automatiser le déploiement et la gestion des branches
 resource "aws_amplify_branch" "amplify_branch" {
   app_id      = aws_amplify_app.morningnewstestfront.id
   branch_name = var.branch_name
 }
 
-# Création d'un domaine
+# Ressource permettant d'associer un domaine personnalisé à l'application AWS Amplify
 resource "aws_amplify_domain_association" "domain_association" {
-  app_id                = aws_amplify_app.morningnewstestfront.id
+  app_id                = aws_amplify_app.morningnewstestfront.id # le nom de domaine est associé à l'ID de cette application AWS Amplify
   domain_name           = var.domain_name
-  wait_for_verification = false
-
+  wait_for_verification = false # terraform ne doit pas attendre la vérification du domaine pour considérer la ressource comme créée 
+# Configuration d'un sous-domaine et l'associe à une branche spécifique de l'application
   sub_domain {
     branch_name = aws_amplify_branch.amplify_branch.branch_name
     prefix      = var.branch_name
@@ -75,9 +74,10 @@ resource "aws_amplify_domain_association" "domain_association" {
 
 }
 
-resource "null_resource" "amplify_deployment" {
+# Création d'une ressource qui ne crée rien mais qui permet de déclencher un déploiement dans l'application AWS AMplify 
+resource "null_resource" "amplify_deployment" { 
   depends_on = [aws_amplify_app.morningnewstestfront]
-  provisioner "local-exec" {
+  provisioner "local-exec" { # permet d'indiquer que la commande ci-dessous sera exécutée en local, sur la machine exécutant le Terraform
     command = "AWS_ACCESS_KEY_ID=${var.aws_access_key_id} AWS_SECRET_ACCESS_KEY=${var.aws_secret_access_key} aws amplify start-job --app-id ${aws_amplify_app.morningnewstestfront.id} --branch-name dev --job-type RELEASE"
   }
 }
@@ -91,59 +91,3 @@ output "amplify_app_id" {
 output "amplify_app_url" {
   value = aws_amplify_domain_association.domain_association.domain_name
 }
-
-
-# resource "aws_amplify_app" "morningnewstestfront" {
-#   name       = "morningnewstestfront"
-#   repository = "https://gitlab.com/patti.ajavon1/morningnewstestfront.git" # à remplacer
-
-#   # Token de Gitlab
-#   access_token = "glpat-YzoxCm86MQp1OmV4YmV6LD95dxTB2LBS82k15Aq8MRA.1706yzrrh"
-
-#   # The default build_spec added by the Amplify Console for Next.js.
-#   # build_spec = <<-EOT
-#   #   version: 1
-#   #   frontend:
-#   #     phases:
-#   #       preBuild:
-#   #         commands:
-#   #           - npm ci --cache .npm --prefer-offline
-#   #       build:
-#   #         commands:
-#   #           - npm run build
-#   #     artifacts:
-#   #       baseDirectory: .next
-#   #       files:
-#   #         - '**/*'
-#   #     cache:
-#   #       paths:
-#   #         - .next/cache/**/*
-#   #         - npm/**/*
-#   # EOT
-
-#   # The default rewrites and redirects added by the Amplify Console.
-#   # custom_rule {
-#   #   source = "/api/<*>"
-#   #   status = "404"
-#   #   target = "/index.html"
-#   # }
-
-#   # environment_variables = {
-#   #   ENV = "test"
-#   # }
-# }
-# resource "aws_amplify_branch" "amplify_branch" {
-#   app_id      = aws_amplify_app.morningnewstestfront.id
-#   branch_name = "main"
-# }
-
-# resource "aws_amplify_domain_association" "domain_association" {
-#   app_id                = aws_amplify_app.morningnewstestfront.id
-#   domain_name           = "morningnewstestfront.com"
-#   wait_for_verification = false
-
-#   sub_domain {
-#     branch_name = aws_amplify_branch.amplify_branch.branch_name
-#     prefix      = "www"
-#   }
-# }
