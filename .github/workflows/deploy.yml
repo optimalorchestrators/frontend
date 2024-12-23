@@ -1,10 +1,9 @@
-name: "Deploy to AWS Amplify"
+name: "Deploy the Morning News application in AWS Amplify"
 
 on:
   push:
     branches:
       - main
-      - dev
 
 jobs:
   deploy:
@@ -42,4 +41,4 @@ jobs:
         working-directory: ./TerraformFront
         run: terraform apply -auto-approve -input=false -var="PATTI_GITHUB_TOKEN=${{ secrets.PATTI_GITHUB_TOKEN }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="aws_session_token=${{ secrets.AWS_SESSION_TOKEN }}"
 
-        # pour les étapes Plan et Apply, on rappelle les variables d'environnement pour s'assurer qu'elles soient bien prises en compte
+        # pour les étapes Plan et Apply, on rappelle les variables d'environnement pour s'assurer qu'elles sont bien prises en compte

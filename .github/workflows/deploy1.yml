@@ -1,28 +1,28 @@
-name: CI Pipeline
+name: CI of tests
 
 on:
   push:
     branches:
       - main
-      - dev
+      - devpa
 
 jobs:
-  cypress:
+  cypress: # Tests end to end
     name: Run Cypress Tests
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:22.12.0
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # action Github officielle, utilisée dans les workflows Github, qui permet de cloner le dépôt du projet dans l'environnement d'exécution
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci # permet d'installer les dépendances dans l'environnement CI
 
       - name: Run Cypress Tests
-        run: npx cypress run
+        run: npm run cypress:run # permet de lancer Cypress sans intervention de notre part
 
-  jest:
+  jest: # Tests unitaires et d'intégration
     name: Run Jest Tests
     runs-on: ubuntu-latest
     container:
@@ -37,7 +37,7 @@ jobs:
       - name: Run Jest Tests
         run: npm test
 
-  eslint:
+  eslint: # Analyse statique du code
     name: Run ESLint
     runs-on: ubuntu-latest
     container:
@@ -52,20 +52,22 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  sonarcloud:
+  sonarcloud: # Analyse de la qualité du code
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
-    container:
-      image: sonar-source/sonarcloud-scan:3.1.0
-    env:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Run SonarCloud Analysis
-        run: |
-          sonar-scanner \
-            -DSonar.organization=optimalorchestrators_frontend \
-            -Dsonar.projectKey=optimalorchestrators \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        with:
+          fetch-depth: 0
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master # action officielle de SonarCloud à utiliser dans un workflow Github
+        env:
+          GITHUB_TOKEN: ${{ secrets.PATTI_GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+            args: > # Paramètres de SonarCloud
+              -Dsonar.organization=optimalorchestrators 
+              -Dsonar.projectKey=optimalorchestrators_frontend
+              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

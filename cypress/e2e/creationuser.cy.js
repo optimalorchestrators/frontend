@@ -1,6 +1,6 @@
 describe("Testing Morning News website", () => {
     it("Create a user and his password", () => {
-        cy.visit("localhost:3001");
+        cy.visit("https://dev.dzhulc8idsfe9.amplifyapp.com/");
         // cy.get("li").within();
         cy.wait(4000)
         // cy.get('.Header_header__VYZ3G').click();
