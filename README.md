@@ -31,6 +31,7 @@ Chaque job nécessite runs-on pour spécifier le type de machine hôte (ici, ubu
 #### Ajout des étapes Checkout Code :
 La première étape de chaque job est de récupérer le code du repo avec actions/checkout@v4.
 
+
 ### Tests Cypress
 * Lancer en local Cypress pour pouvoir récupérer les dossiers et fichiers créés et indispensables au bon fonctionnement de Cypress
 * Ajouter les cas de tests dans le dossier Cypress/e2e
@@ -48,6 +49,7 @@ La première étape de chaque job est de récupérer le code du repo avec action
 * Créer une organisation et un projet dans l'interface SonarCloud. 
 * Les deux premièress lignes se trouvent dans SonarCloud : organization et projectkey
 * La troisième ligne indique à SonarCloud où trouver le rapport de couverture de code au format LCOV.
+
 
 # Le choix d'AWS Amplify
 
